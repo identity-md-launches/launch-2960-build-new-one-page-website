@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { COL, CELL_H, HEM, decimal, readSettlements, kindOf, noteOf, notesOf, stitchPixels, newNeedle, updateNeedle, midiBytes, paintCloth, columnAt } from '../cloth.js';
+import { COL, CELL_H, HEM, decimal, readSettlements, kindOf, noteOf, notesOf, stitchPixels, newNeedle, updateNeedle, midiBytes, paintCloth, columnAt, lastNightWindow, rowsInWindow, walkFeed } from '../cloth.js';
 import { readMIDI } from './midi.mjs';
 
 const event = (round, work, overrides = {}) => ({type:'system.settlement_completed',source:{confirmationStatus:'safe',chainId:'11155111'},payload:{previousSettledThroughRound:String(BigInt(round)-1n),settledThroughRound:String(round),workAdded:work},...overrides});
@@ -86,6 +86,60 @@ test('all-rest MIDI preserves the entire duration with zero note-on events', () 
 test('pointer lookup excludes the open cell and out-of-bounds coordinates', () => {
  assert.equal(columnAt(0,3),0); assert.equal(columnAt(23.9,3),2);
  assert.equal(columnAt(24,3),-1); assert.equal(columnAt(-1,3),-1);
+});
+const at = iso => Date.parse(iso);
+const NOV3 = {start:at('2026-11-03T12:00:00Z'),end:at('2026-11-04T00:00:00Z')};
+test('last night is the most recently finished 20:00 to 08:00 Asia/Shanghai, whatever the clock says', () => {
+ assert.deepEqual(lastNightWindow(at('2026-11-04T08:52:00Z')),NOV3); // 16:52 in Beijing
+ assert.deepEqual(lastNightWindow(at('2026-11-04T00:00:00Z')),NOV3); // 08:00 exactly: the night has just ended
+ assert.deepEqual(lastNightWindow(at('2026-11-04T15:00:00Z')),NOV3); // 23:00, tonight is still running
+ assert.deepEqual(lastNightWindow(at('2026-11-03T23:59:59Z')),{start:at('2026-11-02T12:00:00Z'),end:at('2026-11-03T00:00:00Z')}); // 07:59:59, still inside tonight
+});
+test('night rows include the start, exclude the end, and drop undated rows', () => {
+ const rows=[['1','2026-11-03T11:59:59Z'],['2','2026-11-03T12:00:00Z'],['3','2026-11-03T23:59:59Z'],['4','2026-11-04T00:00:00Z'],['5',null]].map(([round,occurredAt])=>({round,work:'0',occurredAt}));
+ assert.deepEqual(rowsInWindow(rows,NOV3).map(r=>r.round),['2','3']);
+});
+const dated = (round,iso) => event(round,'0',{occurredAt:iso});
+test('walkFeed follows nextCursor until the feed is older than the start', async () => {
+ const pages={'':{events:[dated(3,'2026-11-04T02:00:00Z')],nextCursor:'b'},b:{events:[dated(2,'2026-11-03T13:00:00Z')],nextCursor:'c'},c:{events:[dated(1,'2026-11-03T11:00:00Z')],nextCursor:'d'}};
+ const asked=[];
+ const read=await walkFeed(async cursor=>{asked.push(cursor);return pages[cursor];},NOV3.start);
+ assert.deepEqual(asked,['','b','c']);
+ assert.equal(read.covered,true);
+ assert.deepEqual(readSettlements(read).map(r=>r.round),['1','2','3']);
+});
+test('walkFeed reuses an earlier walk once a page reaches it, without growing on repeat reads', async () => {
+ const known=[dated(3,'2026-11-04T02:00:00Z'),dated(2,'2026-11-03T13:00:00Z')];
+ const page={events:[dated(4,'2026-11-04T03:00:00Z'),dated(3,'2026-11-04T02:00:00Z')],nextCursor:'never'};
+ const asked=[];
+ const first=await walkFeed(async cursor=>{asked.push(cursor);return page;},NOV3.start,known);
+ assert.deepEqual(asked,['']);
+ assert.equal(first.covered,true);
+ assert.equal(first.events.length,3);
+ const second=await walkFeed(async ()=>page,NOV3.start,first.events);
+ assert.equal(second.events.length,3);
+});
+test('walkFeed only vouches for what it read', async () => {
+ await assert.rejects(walkFeed(async ()=>{throw new Error('down');},NOV3.start));
+ await assert.rejects(walkFeed(async ()=>({unrecognized:[]}),NOV3.start));
+ assert.equal((await walkFeed(async ()=>({events:[]}),NOV3.start)).covered,false);
+ const failing=await walkFeed(async cursor=>{if(cursor)throw new Error('down');return {events:[dated(2,'2026-11-03T13:00:00Z')],nextCursor:'b'};},NOV3.start);
+ assert.equal(failing.covered,false);
+ assert.equal(failing.events.length,1);
+ const endless=await walkFeed(async ()=>({events:[dated(2,'2026-11-03T13:00:00Z')],nextCursor:'b'}),NOV3.start);
+ assert.equal(endless.covered,false);
+});
+test('a stitch looks the same in the cloth and in a night export that starts mid-sequence', () => {
+ const odd={round:'1213',work:'1',occurredAt:null};
+ assert.equal(stitchPixels(odd,0)[0].x,stitchPixels(odd,4)[0].x-4*COL);
+});
+test('bundled archive holds the whole night of 3 November', async () => {
+ const snapshot=JSON.parse(await readFile(new URL('../data/settlements.json',import.meta.url),'utf8'));
+ const night=rowsInWindow(readSettlements(snapshot),lastNightWindow(Date.parse(snapshot.capturedAt)));
+ assert.deepEqual(lastNightWindow(Date.parse(snapshot.capturedAt)),NOV3);
+ assert.equal(night.length,70);
+ assert.equal(night.filter(r=>kindOf(r.work)!=='rest').length,11);
+ assert.deepEqual([night[0].round,night[night.length-1].round],['1141','1212']);
 });
 test('bundled archive consists of genuine safe single-round events with dated public provenance', async () => {
  const snapshot=JSON.parse(await readFile(new URL('../data/settlements.json',import.meta.url),'utf8'));

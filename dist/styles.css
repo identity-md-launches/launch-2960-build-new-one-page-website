@@ -49,7 +49,7 @@ button { color: inherit; }
 .brand-english { font: 400 var(--text-body)/1.4 var(--font-display); }
 .header-utilities { display: flex; align-items: center; gap: 30px; font-size: var(--text-label); }
 .about-link { text-decoration: none; padding-block: 12px; }
-.language { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-block-size: 44px; background: none; border: 1px solid var(--rule); border-radius: 4px; padding: 8px 13px; font-size: var(--text-label); }
+.language { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-block-size: 44px; background: none; border: none; border-radius: 4px; padding: 8px 0; font-size: var(--text-label); }
 .language:hover { background: var(--paper-hover); }
 .intro { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-block: 49px 38px; }
 h1 { font: 400 var(--text-display)/1.2 var(--font-display); letter-spacing: -.03em; }
@@ -61,7 +61,6 @@ h1 { font: 400 var(--text-display)/1.2 var(--font-display); letter-spacing: -.03
 .loom h2 { font-size: var(--text-body); }
 .status-dot { inline-size: 6px; block-size: 6px; background: var(--loom-muted); border-radius: 50%; }
 .feed-mode { color: var(--loom-muted); font-size: var(--text-small); font-weight: 400; }
-.loom-spec { color: var(--loom-muted); font-size: var(--text-small); }
 .cloth-space { margin-block: auto; padding-block: 32px 20px; }
 .cloth-meta, .cloth-direction { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: var(--text-small); color: var(--loom-muted); }
 .canvas-scroll { overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-color: var(--loom-rule) var(--loom); scrollbar-width: thin; padding-block: 32px 38px; margin-block: 8px 20px; }
@@ -69,6 +68,7 @@ h1 { font: 400 var(--text-display)/1.2 var(--font-display); letter-spacing: -.03
 .cloth-track { position: relative; min-inline-size: 100%; inline-size: max-content; display: flex; justify-content: flex-end; }
 #cloth { image-rendering: pixelated; image-rendering: crisp-edges; display: block; block-size: 128px; inline-size: 32px; flex-shrink: 0; }
 .selection-line { position: absolute; inset-block: -10px; inline-size: 32px; border: 1px solid var(--loom-text); pointer-events: none; display: none; }
+.night-band { position: absolute; inset-block-start: -31px; block-size: 19px; border-block-end: 1px solid var(--loom-muted); color: var(--loom-muted); font-size: var(--text-small); line-height: 18px; white-space: nowrap; pointer-events: none; display: none; }
 .needle-caption { position: absolute; inset-block-end: -29px; inset-inline-end: 0; font-size: var(--text-small); color: var(--loom-muted); white-space: nowrap; }
 .direction-line { flex: 1; block-size: 1px; background: var(--loom-rule); }
 .needle-status { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding-block-start: 17px; border-block-start: 1px solid var(--loom-rule); font-size: var(--text-small); }
@@ -156,14 +156,13 @@ input[type=range] { accent-color: var(--olive); min-block-size: 44px; margin: 0;
   .brand-english { font-size: var(--text-small); }
   .header-utilities { gap: 12px; }
   .about-link { display: none; }
-  .language { padding-inline: 10px; }
   .language .icon { display: none; }
   .intro { padding-block: 28px 24px; }
   .intro-line { margin-block-start: 12px; font-size: var(--text-label); max-inline-size: 32em; }
   .instrument { grid-template-columns: 1fr; }
   .loom { border-radius: 5px 5px 0 0; padding: 20px 18px 16px; }
   .cloth-space { padding-block: 20px 15px; }
-  .canvas-scroll { padding-block: 20px 32px; margin-block: 4px 12px; }
+  .canvas-scroll { padding-block: 32px; margin-block: 4px 12px; }
   #cloth { block-size: 96px; }
   .selection-line { inline-size: 24px; }
   .needle-status { gap: 7px; padding-block-start: 13px; }
@@ -197,7 +196,6 @@ input[type=range] { accent-color: var(--olive); min-block-size: 44px; margin: 0;
   :root { --text-display: 28px; }
   .page-width { inline-size: calc(100% - 32px); }
   .brand-english { display: none; }
-  .loom-spec { font-size: var(--text-small); }
   .loom { padding-inline: 14px; }
   .player { padding: 16px; }
   .downloads { grid-template-columns: 1fr; }

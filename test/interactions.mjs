@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { serve } from '../scripts/preview.mjs';
 import { readMIDI } from './midi.mjs';
+import { lastNightWindow } from '../cloth.js';
 const pw = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const browserName = process.env.TEST_BROWSER || 'chromium';
 const launchOptions = { headless: true, ...(process.env.BROWSER_EXECUTABLE ? { executablePath:process.env.BROWSER_EXECUTABLE } : {}) };
@@ -12,8 +13,10 @@ const base = `http://127.0.0.1:${address.port}/preview/`;
 await mkdir('test/scratch/interactions', {recursive:true});
 const checks=[];
 let browser;
-const event = (round, work, overrides = {}) => ({type:'system.settlement_completed',occurredAt:'2026-11-03T23:00:00Z',source:{confirmationStatus:'safe',chainId:'11155111'},payload:{previousSettledThroughRound:String(round-1),settledThroughRound:String(round),workAdded:String(work)},...overrides});
-const fixture = [event(100,0),event(101,1),event(102,499),event(103,500),event(104,'9007199254740993')];
+const night = lastNightWindow(Date.now());
+const afterNight = new Date(night.end + 60000).toISOString();
+const event = (round, work, overrides = {}) => ({type:'system.settlement_completed',occurredAt:new Date(night.start + (round-100)*60000).toISOString(),source:{confirmationStatus:'safe',chainId:'11155111'},payload:{previousSettledThroughRound:String(round-1),settledThroughRound:String(round),workAdded:String(work)},...overrides});
+const fixture = [event(100,0),event(101,1),event(102,499),event(103,500),event(104,'9007199254740993'),event(105,777,{occurredAt:afterNight})];
 const report = (name, detail='') => { checks.push({name,passed:true,detail}); console.log(`PASS ${name}${detail ? ': '+detail : ''}`); };
 try {
  browser = await pw[browserName].launch(launchOptions);
@@ -23,11 +26,11 @@ try {
  page.on('pageerror',error=>errors.push(error.message));
  page.on('request',request=>{ if(request.method()!=='GET')writes.push(request.method()+' '+request.url()); });
  page.on('response',response=>{if(response.url().startsWith(base)&&response.status()>=400)resourceErrors.push(response.url());});
- let rows=[...fixture], failFeed=false, empty=false, invalid=false, measurement={rpmMilli:1000,distanceMm:1000}, failStatus=false;
+ let rows=[...fixture], failFeed=false, empty=false, invalid=false, extras=true, measurement={rpmMilli:1000,distanceMm:1000}, failStatus=false;
  await page.route('https://api.squeekchain.com/**',async route=>{
   if(route.request().url().includes('/v1/events')){
    if(failFeed)return route.abort();
-   return route.fulfill({json:invalid ? {unrecognized:[]} : {events:empty?[]:[...rows,event(200,700,{source:{confirmationStatus:'pending'}}),event(201,700,{payload:{previousSettledThroughRound:'199',settledThroughRound:'201',workAdded:'700'}})]}});
+   return route.fulfill({json:invalid ? {unrecognized:[]} : {events:empty?[]:[...rows,...(extras?[event(200,700,{source:{confirmationStatus:'pending'}}),event(201,700,{payload:{previousSettledThroughRound:'199',settledThroughRound:'201',workAdded:'700'}})]:[])]}});
   }
   if(failStatus)return route.abort();
   return route.fulfill({json:{measurement:{freshness:'online',observedAt:new Date().toISOString(),...measurement},builder:{queued:{openRoundWorkUnits:'99999999999999999999999999'}}}});
@@ -35,9 +38,10 @@ try {
  await page.goto(base);
  await page.waitForFunction(()=>document.getElementById('feed-mode').textContent==='已同步');
  assert.equal(await page.locator('html').getAttribute('lang'),'zh-Hans');
- assert.match(await page.locator('#score-summary').textContent(),/5 针/);
- assert.equal(await page.locator('#cloth').getAttribute('width'),'48');
- report('Safe event filtering and Chinese default','5 accepted rounds, including a rest, short wefts and accents');
+ assert.match(await page.locator('#score-summary').textContent(),/20:00 – .* 08:00 · 5 针 · 4 个发声轮次/);
+ assert.equal(await page.locator('#cloth').getAttribute('width'),'56');
+ assert.equal(await page.locator('#night-band').textContent(),'昨夜');
+ report('Safe event filtering, night window and Chinese default','5 accepted rounds in the night, including a rest, short wefts and accents; a sixth, daytime stitch stays in the cloth only');
  for(const width of [320,390,720,900,1440]){
   await page.setViewportSize({width,height:844});
   const layout=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,play:document.getElementById('play').getBoundingClientRect().toJSON()}));
@@ -53,7 +57,7 @@ try {
  assert.match(await page.locator('#picked').textContent(),/第 101 轮.*D4/);
  await page.locator('#canvas-scroll').focus();
  await page.keyboard.press('End');
- assert.match(await page.locator('#picked').textContent(),/第 104 轮.*重音/);
+ assert.match(await page.locator('#picked').textContent(),/第 105 轮.*重音/);
  const focus=await page.locator('#canvas-scroll').evaluate(node=>({style:getComputedStyle(node).outlineStyle,width:getComputedStyle(node).outlineWidth}));
  assert.equal(focus.style,'solid'); assert.equal(focus.width,'2px');
  await page.screenshot({path:'test/scratch/interactions/keyboard-focus.png',fullPage:true});
@@ -93,7 +97,7 @@ try {
  const parsed=readMIDI(await readFile(await midi.path()));
  assert.deepEqual(parsed.notes.map(n=>n.note),[62,69,60,67,67,74]);
  assert.equal(parsed.seconds,1.1);
- report('Real PNG and MIDI downloads','PNG is 40×32: five 8×24 cells plus hems, no open column. MIDI has six expected pitches, two added fifths, and the initial rest');
+ report('Real PNG and MIDI downloads use the night only','PNG is 40×32: five 8×24 cells plus hems, no open column or daytime stitch. MIDI has six expected pitches, two added fifths, and the initial rest');
  rows=Array.from({length:40},(_,i)=>event(100+i,i%3===0?0:i+1));
  await page.locator('#refresh').click();await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
  await page.locator('#play').click();
@@ -115,13 +119,22 @@ try {
  assert.match(await page.locator('#score-summary').textContent(),/41 stitches/);
  invalid=false;empty=true;
  await page.locator('#refresh').click();await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
- assert.equal(await page.locator('#play').isDisabled(),true);
- assert.equal(await page.locator('#png').isDisabled(),true);
- assert.match(await page.locator('#feed-status').textContent(),/No safe single-round settlements/);
+ assert.equal(await page.locator('#play').isEnabled(),true);
+ assert.equal(await page.locator('#png').isEnabled(),true);
+ assert.match(await page.locator('#score-summary').textContent(),/41 stitches/);
+ assert.match(await page.locator('#feed-status').textContent(),/Refresh failed/);
  empty=false;
  await page.locator('#refresh').click();await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
  assert.equal(await page.locator('#play').isEnabled(),true);
- report('Malformed, empty and recovered feed states');
+ assert.doesNotMatch(await page.locator('#feed-status').textContent(),/Refresh failed/);
+ report('Malformed, empty and recovered feed states','An empty read keeps what is shown and says so');
+ extras=false;rows=[event(300,5,{occurredAt:afterNight})];
+ await page.locator('#refresh').click();await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
+ assert.match(await page.locator('#score-summary').textContent(),/No confirmed settlements this night/);
+ for(const id of ['#play','#png','#midi'])assert.equal(await page.locator(id).isDisabled(),true);
+ assert.equal(await page.locator('#round-picker').isEnabled(),true);
+ extras=true;
+ report('A night with no settlements says so and disables Play, PNG and MIDI','Later rounds stay readable in the cloth');
  rows=[event(100,0),event(101,0),event(102,0)];
  await page.locator('#refresh').click();await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
  assert.match(await page.locator('#player-all-rest').textContent(),/silent/);
@@ -134,7 +147,7 @@ try {
  assert.equal(motion,'0s');
  await page.locator('.method summary').click();
  assert.equal(await page.locator('.method').getAttribute('open'),'');
- assert.match(await page.locator('.method-body').textContent(),/latest 100 protocol events/);
+ assert.match(await page.locator('.method-body').textContent(),/20:00 to 08:00/);
  report('Reduced motion and source disclosure');
  await page.evaluate(()=>{Object.defineProperty(Storage.prototype,'setItem',{value(){throw new Error('Storage blocked');}});});
  await page.locator('#lang').click();
@@ -150,12 +163,50 @@ try {
  await offlinePage.waitForFunction(()=>!document.getElementById('play').disabled&&!document.getElementById('refresh').disabled);
  assert.equal(await offlinePage.locator('#feed-mode').textContent(),'存档');
  assert.match(await offlinePage.locator('#feed-status').textContent(),/真实确认结算/);
+ assert.match(await offlinePage.locator('#score-summary').textContent(),/11月3日 20:00 – 11月4日 08:00 · 70 针 · 11 个发声轮次/);
  const box=await offlinePage.locator('#play').boundingBox();assert(box.bottom===undefined ? box.y+box.height<844 : box.bottom<844);
  await offlinePage.screenshot({path:`test/scratch/interactions/${browserName}-archive-390.png`,fullPage:true});
  await offlinePage.setViewportSize({width:1440,height:1000});
  await offlinePage.screenshot({path:`test/scratch/interactions/${browserName}-archive-1440.png`,fullPage:true});
- report('Dated genuine archive works without the external API','50 bundled confirmed settlements; archive label visible on loom');
+ report('Dated genuine archive works without the external API','121 bundled confirmed settlements, 70 of them in the archived night; archive label visible on loom');
  await offline.close();
+ const fresh=async setup=>{const c=await browser.newContext({viewport:{width:390,height:844}});const p=await c.newPage();await setup(p);return {c,p};};
+ const asked=[];
+ const paged=await fresh(p=>p.route('https://api.squeekchain.com/**',route=>{
+  const url=new URL(route.request().url());
+  if(!url.pathname.endsWith('/v1/events'))return route.fulfill({json:{}});
+  const cursor=url.searchParams.get('cursor')||'';asked.push(cursor);
+  if(!cursor)return route.fulfill({json:{events:[event(105,777,{occurredAt:afterNight})],nextCursor:'older'}});
+  return route.fulfill({json:{events:[event(101,1),event(100,0),event(99,1,{occurredAt:new Date(night.start-60000).toISOString()})]}});
+ }));
+ await paged.p.goto(base);
+ await paged.p.waitForFunction(()=>document.getElementById('feed-mode').textContent==='已同步');
+ assert.deepEqual(asked.slice(0,2),['','older']);
+ assert.match(await paged.p.locator('#score-summary').textContent(),/· 2 针 · 1 个发声轮次/);
+ assert.equal(await paged.p.locator('#cloth').getAttribute('width'),'32');
+ await paged.c.close();
+ report('Live read follows nextCursor back past the start of the night','Rounds before the night are dropped; the later round stays in the cloth only');
+ const quiet=await fresh(p=>p.route('https://api.squeekchain.com/**',route=>route.fulfill({json:{events:[]}})));
+ await quiet.p.goto(base);
+ await quiet.p.waitForFunction(()=>document.getElementById('feed-status').textContent.includes('刷新失败'));
+ assert.equal(await quiet.p.locator('#feed-mode').textContent(),'存档');
+ assert.equal(await quiet.p.locator('#play').isEnabled(),true);
+ assert.equal(await quiet.p.locator('#midi').isEnabled(),true);
+ await quiet.c.close();
+ report('An empty live read keeps the archive playable');
+ const oldWebKit=await fresh(async p=>{await p.addInitScript(()=>{delete AbortSignal.timeout;});await p.route('https://api.squeekchain.com/**',route=>route.abort());});
+ await oldWebKit.p.goto(base);
+ await oldWebKit.p.waitForFunction(()=>!document.getElementById('play').disabled);
+ assert.equal(await oldWebKit.p.locator('#feed-mode').textContent(),'存档');
+ await oldWebKit.c.close();
+ report('Reads work without AbortSignal.timeout');
+ const nothing=await fresh(async p=>{await p.route('https://api.squeekchain.com/**',route=>route.abort());await p.route('**/data/settlements.json',route=>route.fulfill({status:500,body:''}));});
+ await nothing.p.goto(base);
+ await nothing.p.waitForFunction(()=>document.getElementById('feed-status').textContent.includes('暂无可用结算'));
+ assert.equal(await nothing.p.locator('#score-summary').textContent(),'暂无可用结算。请刷新数据重试。');
+ assert.equal(await nothing.p.locator('#play').isDisabled(),true);
+ await nothing.c.close();
+ report('A failed read says so in the player summary, not "waiting"');
  console.log(`${checks.length} browser checks passed in ${browserName}.`);
 } catch(error){checks.push({name:'Browser suite',passed:false,detail:String(error)});console.error(error);process.exitCode=1;}
 finally{

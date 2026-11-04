@@ -2,6 +2,7 @@
 /** @typedef {{round: string, work: string, occurredAt: string | null}} Stitch */
 /** @typedef {{index: number, rpm: number, moving: boolean, baseMm: number | null, lastMm: number | null, round: string}} Needle */
 /** @typedef {{x:number, y:number, w:number, h:number, color:string, role:string}} Pixel */
+/** @typedef {{start: number, end: number}} NightWindow */
 
 export const COL = 8;
 export const CELL_H = 24;
@@ -12,6 +13,10 @@ export const ACCENT_SECONDS = 0.18;
 const SCALE = [0, 2, 4, 7, 9];
 const WEFTS = [4, 8, 12, 16, 20];
 export const THREAD = Object.freeze({ warp: '#5b4737', warpAlt: '#503d30', hem: '#35291f', rest: '#30251d', gold: '#e1ad62', light: '#f4dfad', knot: '#de6047', needle: '#f8f0de' });
+const HOUR = 3600000;
+const DAY = 24 * HOUR;
+const UTC8 = 8 * HOUR;
+const MAX_PAGES = 30;
 
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 function record(value) { return typeof value === 'object' && value !== null && !Array.isArray(value); }
@@ -46,6 +51,61 @@ export function readSettlements(body) {
   return [...rounds.values()].filter(row => !conflicts.has(row.round)).sort((a, b) => BigInt(a.round) < BigInt(b.round) ? -1 : 1);
 }
 
+/** The most recently finished night: 20:00 to 08:00 Asia/Shanghai (no daylight saving), start inclusive, end exclusive. @param {number} now @returns {NightWindow} */
+export function lastNightWindow(now) {
+  const local = now + UTC8;
+  let end = Math.floor(local / DAY) * DAY + 8 * HOUR;
+  if (end > local) end -= DAY;
+  return { start: end - 12 * HOUR - UTC8, end: end - UTC8 };
+}
+
+/** @param {Stitch[]} rows @param {NightWindow} night */
+export function rowsInWindow(rows, night) {
+  return rows.filter(row => { const at = row.occurredAt === null ? NaN : Date.parse(row.occurredAt); return at >= night.start && at < night.end; });
+}
+
+/** @param {unknown} event */
+function eventTime(event) { return record(event) && typeof event.occurredAt === 'string' ? Date.parse(event.occurredAt) : NaN; }
+/** @param {unknown[]} events */
+function oldestTime(events) { return events.reduce((/** @type {number} */ oldest, event) => { const at = eventTime(event); return at < oldest ? at : oldest; }, Infinity); }
+/** @param {unknown[]} events */
+function newestTime(events) { return events.reduce((/** @type {number} */ newest, event) => { const at = eventTime(event); return at > newest ? at : newest; }, -Infinity); }
+
+/**
+ * Follows nextCursor until the feed is older than start, or reaches events an earlier walk already holds.
+ * covered is false when the read cannot vouch for the whole span: nothing came back, a later page failed, or the page limit ran out.
+ * @param {(cursor: string) => Promise<unknown>} readPage @param {number} start @param {unknown[]} [known]
+ * @returns {Promise<{events: unknown[], covered: boolean}>}
+ */
+export async function walkFeed(readPage, start, known = []) {
+  const joinAt = newestTime(known);
+  /** @type {unknown[]} */
+  const events = [];
+  let cursor = '';
+  for (let page = 0; page < MAX_PAGES; page++) {
+    /** @type {unknown} */
+    let body;
+    try { body = await readPage(cursor); } catch (error) {
+      if (page === 0) throw error;
+      return { events, covered: false };
+    }
+    if (!record(body) || !Array.isArray(body.events)) {
+      if (page === 0) throw new Error('Invalid event feed');
+      return { events, covered: false };
+    }
+    events.push(...body.events);
+    const oldest = oldestTime(body.events);
+    if (oldest < start) return { events, covered: true };
+    if (oldest <= joinAt) {
+      const seen = new Set(events.map(event => JSON.stringify(event)));
+      return { events: [...events, ...known.filter(event => eventTime(event) <= oldest && !seen.has(JSON.stringify(event)))], covered: true };
+    }
+    if (typeof body.nextCursor !== 'string' || !body.nextCursor) return { events, covered: events.length > 0 };
+    cursor = body.nextCursor;
+  }
+  return { events, covered: false };
+}
+
 /** @param {string | number | bigint} work */
 export function kindOf(work) { const value = BigInt(work); return value === 0n ? 'rest' : value < 500n ? 'jog' : 'sprint'; }
 /** @param {string | number | bigint} work */
@@ -60,7 +120,7 @@ export function stitchPixels(stitch, index) {
   if (kind === 'rest') return [{ x: x + 3, y: HEM + 12, w: 1, h: 1, color: THREAD.rest, role: 'rest' }];
   const y = HEM + WEFTS[Number(BigInt(stitch.work) % 5n)];
   /** @type {Pixel[]} */
-  const pixels = [{ x: x + (index % 2 ? 3 : 1), y, w: kind === 'sprint' ? 5 : 4, h: 1, color: kind === 'sprint' ? THREAD.light : THREAD.gold, role: 'weft' }];
+  const pixels = [{ x: x + (BigInt(stitch.round) % 2n === 1n ? 3 : 1), y, w: kind === 'sprint' ? 5 : 4, h: 1, color: kind === 'sprint' ? THREAD.light : THREAD.gold, role: 'weft' }];
   if (kind === 'sprint') pixels.push({ x: x + 3, y, w: 2, h: 2, color: THREAD.knot, role: 'knot' });
   return pixels;
 }

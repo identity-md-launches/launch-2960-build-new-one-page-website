@@ -47,7 +47,6 @@
       <div class="loom">
         <div class="loom-heading">
           <div class="loom-title"><span class="status-dot" aria-hidden="true"></span><h2 data-copy="clothTitle">结算织物</h2><span class="feed-mode" id="feed-mode">读取中</span></div>
-          <span class="loom-spec" data-copy="cellSize">每轮 8 × 24 像素</span>
         </div>
         <div class="cloth-space">
           <div class="cloth-meta"><span id="round-range" class="numbers">正在读取轮次</span><span id="cloth-count" class="numbers"></span></div>
@@ -55,6 +54,7 @@
             <div class="cloth-track" id="cloth-track">
               <canvas id="cloth" width="8" height="32" role="img" aria-label="正在读取确认结算"></canvas>
               <div id="selection-line" class="selection-line" aria-hidden="true"></div>
+              <div id="night-band" class="night-band" aria-hidden="true"></div>
               <div class="needle-caption" id="needle-caption" data-copy="open">未锁针</div>
             </div>
           </div>
@@ -65,7 +65,7 @@
 
       <aside class="player" aria-labelledby="score-title">
         <div class="player-heading"><h2 id="score-title" data-copy="scoreTitle">昨夜的轮谱</h2><span class="score-symbol" aria-hidden="true">♫</span></div>
-        <p id="score-summary" class="player-summary" data-copy="scoreWaiting">正在读取确认结算</p>
+        <p id="score-summary" class="player-summary numbers" data-copy="scoreWaiting">正在读取确认结算</p>
         <button id="play" class="button button-primary" type="button" disabled><svg class="icon" aria-hidden="true"><use id="play-icon" href="#i-play"/></svg><span id="play-label" data-copy="play">播放昨夜</span></button>
         <div class="playback"><progress id="progress" value="0" max="1" aria-label="播放进度"></progress><div class="playback-time numbers"><span id="elapsed">0:00</span><span id="duration">0:00</span></div></div>
         <div class="volume-control"><svg class="icon" aria-hidden="true"><use href="#i-sound"/></svg><label for="volume" data-copy="volume">音量</label><input id="volume" type="range" min="0" max="100" value="45"><output for="volume" id="volume-value" class="numbers">45%</output></div>
@@ -89,7 +89,7 @@
         <article class="key-item"><svg viewBox="0 0 32 56" class="sample-stitch" aria-hidden="true"><path fill="#503d30" d="M0 0h32v56H0z"/><path fill="#e1ad62" d="M4 28h16v4H4z"/></svg><div><h3 data-copy="jogTitle">短线</h3><p class="key-work numbers" data-copy="jogWork">工作量 1–499</p><p data-copy="jogDescription">一缕金色纬线，一个五声音阶音符。</p></div></article>
         <article class="key-item"><svg viewBox="0 0 32 56" class="sample-stitch" aria-hidden="true"><path fill="#503d30" d="M0 0h32v56H0z"/><path fill="#f4dfad" d="M4 28h20v4H4z"/><path fill="#de6047" d="M12 28h8v8h-8z"/></svg><div><h3 data-copy="sprintTitle">重音</h3><p class="key-work numbers" data-copy="sprintWork">工作量 ≥ 500</p><p data-copy="sprintDescription">浅色纬线与红结，再叠一个五度音。</p></div></article>
       </div>
-      <details class="method"><summary data-copy="methodTitle">这些针脚从哪里来？</summary><div class="method-body"><p data-copy="methodBody">只使用 Squeekchain Sepolia 标记为 safe 的 system.settlement_completed 事件，且每次恰好结算一轮。工作量除以 5 的余数，对应 C、D、E、G、A。每轮占用相同大小的格子，工作量不会变成柱高。</p><p data-copy="methodWindow">“播放昨夜”重放当前织物中的轮次：来自最近 100 条协议事件，并非完整的日历夜间记录。存档模式使用随页面保存的真实结算，日期会标明。</p><p><a href="https://api.squeekchain.com/v1/events?category=protocol&amp;limit=100" target="_blank" rel="noreferrer" data-copy="eventSource">查看公开结算</a><a href="https://api.squeekchain.com/v1/status" target="_blank" rel="noreferrer" data-copy="measurementSource">查看轮子测量</a></p></div></details>
+      <details class="method"><summary data-copy="methodTitle">这些针脚从哪里来？</summary><div class="method-body"><p data-copy="methodBody">只使用 Squeekchain Sepolia 标记为 safe 的 system.settlement_completed 事件，且每次恰好结算一轮。工作量除以 5 的余数，对应 C、D、E、G、A。每轮占用相同大小的格子，工作量不会变成柱高。</p><p data-copy="methodWindow">“昨夜”固定指最近一个已结束的夜晚：北京时间（UTC+8）20:00 至次日 08:00。播放和两个下载只使用这段时间内的结算；织物会继续织到现在，供逐针查看。这一夜没有结算时，播放和下载会停用。读不到公开数据时，页面改用随页面保存的真实结算，并标明它属于哪一夜。</p><p><a href="https://api.squeekchain.com/v1/events?category=protocol&amp;limit=100" target="_blank" rel="noreferrer" data-copy="eventSource">查看公开结算</a><a href="https://api.squeekchain.com/v1/status" target="_blank" rel="noreferrer" data-copy="measurementSource">查看轮子测量</a></p></div></details>
     </section>
     <noscript><p class="noscript">请启用 JavaScript 以读取结算、播放旋律及下载织物。Please enable JavaScript to use the loom.</p></noscript>
   </main>
