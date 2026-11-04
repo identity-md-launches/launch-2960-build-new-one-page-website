@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e8">
+  <title>轮谱 · Burrowkeep | 让结算成为旋律</title>
+  <meta name="description" content="每一次确认结算，都是一针、一音。将 Squeekchain Sepolia 的轮次织成像素布，聆听并保存为 PNG 与 MIDI。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="轮谱 · Burrowkeep">
+  <meta property="og:description" content="每一次确认结算，都是一针、一音。听见昨夜的针脚。">
+  <meta property="og:image" content="./assets/share.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./score.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main" data-copy="skip">跳到织布</a>
+  <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><path d="M6 6h12v12H6Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol>
+  </svg>
+  <header class="site-header page-width">
+    <a class="brand" href="./" aria-label="轮谱 Burrowkeep">
+      <img src="./assets/favicon.svg" width="36" height="36" alt="">
+      <span class="brand-name">轮谱<span class="brand-english">Burrowkeep</span></span>
+    </a>
+    <div class="header-utilities">
+      <a class="about-link" href="#about" data-copy="aboutLink">关于轮谱</a>
+      <button id="lang" class="language" type="button" aria-label="Switch to English"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg><span>English</span></button>
+    </div>
+  </header>
+  <main id="main" class="page-width" tabindex="-1">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title" data-copy="headline">听见昨夜的针脚。</h1>
+        <p class="intro-line" data-copy="intro">把 Squeekchain Sepolia 的确认结算，织成一块布、一段旋律。</p>
+      </div>
+    </section>
+
+    <section class="instrument" aria-label="像素织布与播放器" id="instrument">
+      <div class="loom">
+        <div class="loom-heading">
+          <div class="loom-title"><span class="status-dot" aria-hidden="true"></span><h2 data-copy="clothTitle">结算织物</h2><span class="feed-mode" id="feed-mode">读取中</span></div>
+          <span class="loom-spec" data-copy="cellSize">每轮 8 × 24 像素</span>
+        </div>
+        <div class="cloth-space">
+          <div class="cloth-meta"><span id="round-range" class="numbers">正在读取轮次</span><span id="cloth-count" class="numbers"></span></div>
+          <div class="canvas-scroll" id="canvas-scroll" tabindex="0" role="group" aria-label="织物，可横向滚动；用下方轮次控件查看每一针">
+            <div class="cloth-track" id="cloth-track">
+              <canvas id="cloth" width="8" height="32" role="img" aria-label="正在读取确认结算"></canvas>
+              <div id="selection-line" class="selection-line" aria-hidden="true"></div>
+              <div class="needle-caption" id="needle-caption" data-copy="open">未锁针</div>
+            </div>
+          </div>
+          <div class="cloth-direction"><span data-copy="past">较早轮次</span><span class="direction-line" aria-hidden="true"></span><span data-copy="now">最近一轮</span></div>
+        </div>
+        <div class="needle-status"><span class="needle-symbol" aria-hidden="true"></span><p id="needle-status" data-copy="needleWaiting">针停着，等待测量。</p><span class="needle-quiet" data-copy="notSettled">确认后才落色</span></div>
+      </div>
+
+      <aside class="player" aria-labelledby="score-title">
+        <div class="player-heading"><h2 id="score-title" data-copy="scoreTitle">昨夜的轮谱</h2><span class="score-symbol" aria-hidden="true">♫</span></div>
+        <p id="score-summary" class="player-summary" data-copy="scoreWaiting">正在读取确认结算</p>
+        <button id="play" class="button button-primary" type="button" disabled><svg class="icon" aria-hidden="true"><use id="play-icon" href="#i-play"/></svg><span id="play-label" data-copy="play">播放昨夜</span></button>
+        <div class="playback"><progress id="progress" value="0" max="1" aria-label="播放进度"></progress><div class="playback-time numbers"><span id="elapsed">0:00</span><span id="duration">0:00</span></div></div>
+        <div class="volume-control"><svg class="icon" aria-hidden="true"><use href="#i-sound"/></svg><label for="volume" data-copy="volume">音量</label><input id="volume" type="range" min="0" max="100" value="45"><output for="volume" id="volume-value" class="numbers">45%</output></div>
+        <div class="downloads"><button id="png" class="button button-secondary" type="button" disabled><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-copy="png">保存织物</span><span class="format">PNG</span></button><button id="midi" class="button button-secondary" type="button" disabled><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-copy="midi">保存旋律</span><span class="format">MIDI</span></button></div>
+        <p class="player-note" data-copy="sameScore">同一组轮次，同一段旋律。休止也被保留。</p>
+        <p id="action-status" class="action-status" role="status"></p>
+      </aside>
+    </section>
+
+    <div class="data-line"><p id="feed-status" role="status" data-copy="loading">正在读取公开结算…</p><button id="refresh" type="button" class="text-button"><span data-copy="refresh">刷新数据</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+
+    <section class="stitch-inspector" aria-labelledby="inspector-title">
+      <div class="inspector-heading"><h2 id="inspector-title" data-copy="inspectTitle">细看一针</h2><p data-copy="inspectHint">选择织物，或用方向键逐轮查看。</p></div>
+      <div class="inspect-controls"><label for="round-picker" data-copy="round">轮次</label><input id="round-picker" type="range" min="0" max="0" value="0" disabled><output id="picked" for="round-picker" class="numbers" aria-live="polite" data-copy="noSelection">等待确认轮次</output></div>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="about-heading"><h2 id="about-title" data-copy="aboutTitle">一轮，一针，一音。</h2><p data-copy="aboutIntro">只记录已经确认的事，也给安静留一个位置。</p></div>
+      <div class="stitch-key">
+        <article class="key-item"><svg viewBox="0 0 32 56" class="sample-stitch" aria-hidden="true"><path fill="#503d30" d="M0 0h32v56H0z"/><path fill="#30251d" d="M12 28h4v4h-4z"/></svg><div><h3 data-copy="restTitle">休止</h3><p class="key-work numbers" data-copy="restWork">工作量 0</p><p data-copy="restDescription">一枚暗针，留下一拍安静。</p></div></article>
+        <article class="key-item"><svg viewBox="0 0 32 56" class="sample-stitch" aria-hidden="true"><path fill="#503d30" d="M0 0h32v56H0z"/><path fill="#e1ad62" d="M4 28h16v4H4z"/></svg><div><h3 data-copy="jogTitle">短线</h3><p class="key-work numbers" data-copy="jogWork">工作量 1–499</p><p data-copy="jogDescription">一缕金色纬线，一个五声音阶音符。</p></div></article>
+        <article class="key-item"><svg viewBox="0 0 32 56" class="sample-stitch" aria-hidden="true"><path fill="#503d30" d="M0 0h32v56H0z"/><path fill="#f4dfad" d="M4 28h20v4H4z"/><path fill="#de6047" d="M12 28h8v8h-8z"/></svg><div><h3 data-copy="sprintTitle">重音</h3><p class="key-work numbers" data-copy="sprintWork">工作量 ≥ 500</p><p data-copy="sprintDescription">浅色纬线与红结，再叠一个五度音。</p></div></article>
+      </div>
+      <details class="method"><summary data-copy="methodTitle">这些针脚从哪里来？</summary><div class="method-body"><p data-copy="methodBody">只使用 Squeekchain Sepolia 标记为 safe 的 system.settlement_completed 事件，且每次恰好结算一轮。工作量除以 5 的余数，对应 C、D、E、G、A。每轮占用相同大小的格子，工作量不会变成柱高。</p><p data-copy="methodWindow">“播放昨夜”重放当前织物中的轮次：来自最近 100 条协议事件，并非完整的日历夜间记录。存档模式使用随页面保存的真实结算，日期会标明。</p><p><a href="https://api.squeekchain.com/v1/events?category=protocol&amp;limit=100" target="_blank" rel="noreferrer" data-copy="eventSource">查看公开结算</a><a href="https://api.squeekchain.com/v1/status" target="_blank" rel="noreferrer" data-copy="measurementSource">查看轮子测量</a></p></div></details>
+    </section>
+    <noscript><p class="noscript">请启用 JavaScript 以读取结算、播放旋律及下载织物。Please enable JavaScript to use the loom.</p></noscript>
+  </main>
+  <footer class="site-footer page-width"><p data-copy="footer">轮谱只静静记录。不催仓鼠跑，也不花钱包。</p><a href="https://sepolia.squeekchain.com/" target="_blank" rel="noreferrer">Squeekchain Sepolia <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><span data-copy="footerNote">一块可以听的布。</span></footer>
+</body>
+</html>

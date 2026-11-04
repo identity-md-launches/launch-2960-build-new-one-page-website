@@ -1,0 +1,757 @@
+{
+  "source": "https://api.squeekchain.com/v1/events?category=protocol&limit=100",
+  "capturedAt": "2026-11-04T08:24:17.694Z",
+  "description": "Genuine safe single-round Sepolia settlements captured from the public API. Archive fallback, not a live feed.",
+  "events": [
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x1ab7f594226171f0c375ef9a243cafe964e00668912e719c7eb7969abf0aef5a:233:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T08:20:48.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x1ab7f594226171f0c375ef9a243cafe964e00668912e719c7eb7969abf0aef5a"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1262",
+        "settledThroughRound": "1263",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x826b90086a0f3499b28324aee74e69d29725d77cebe967e0c406aa46e192a2a1:208:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T08:10:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x826b90086a0f3499b28324aee74e69d29725d77cebe967e0c406aa46e192a2a1"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1261",
+        "settledThroughRound": "1262",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x0990ce9fbc753d5fbcc94b14ed057a6dbd31292421d21db0b50a92ea784fc2ea:127:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T08:00:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x0990ce9fbc753d5fbcc94b14ed057a6dbd31292421d21db0b50a92ea784fc2ea"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1260",
+        "settledThroughRound": "1261",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x34ad6ee25306c95d782308243f730a6612e16d22cc5ecb249948f0d17c859078:117:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T07:50:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x34ad6ee25306c95d782308243f730a6612e16d22cc5ecb249948f0d17c859078"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1259",
+        "settledThroughRound": "1260",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x3f28d2b4d815b5bfb7864866c8e2eb8629e64cc401568d5265425fa6df4747e4:85:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T07:40:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x3f28d2b4d815b5bfb7864866c8e2eb8629e64cc401568d5265425fa6df4747e4"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1258",
+        "settledThroughRound": "1259",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xc8b9b0af16a5f3d69f7e88919172f6760bbaf710762898734bb4d71ab2c599ef:152:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T07:30:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xc8b9b0af16a5f3d69f7e88919172f6760bbaf710762898734bb4d71ab2c599ef"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1257",
+        "settledThroughRound": "1258",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xc45e02fe9c40577351fec04e2712ebbdca66989478ac64f5366674cdc7751c9d:241:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T07:20:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xc45e02fe9c40577351fec04e2712ebbdca66989478ac64f5366674cdc7751c9d"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1256",
+        "settledThroughRound": "1257",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xab19ad238ad8cff46ac367fe1de3340b2257f17fa8692dfd3f27a7473069dcb5:1175:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T07:10:48.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xab19ad238ad8cff46ac367fe1de3340b2257f17fa8692dfd3f27a7473069dcb5"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1255",
+        "settledThroughRound": "1256",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xf5d46b89075315bcff74dc095292c3ec3fb92a2011c5ade8af92d2ba5f51794d:170:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T07:00:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xf5d46b89075315bcff74dc095292c3ec3fb92a2011c5ade8af92d2ba5f51794d"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1254",
+        "settledThroughRound": "1255",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x368d841bb5ada1041e5f9bddfb5ce627d8086bb48635cfe8f21053fb0dfa8a42:215:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T06:50:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x368d841bb5ada1041e5f9bddfb5ce627d8086bb48635cfe8f21053fb0dfa8a42"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1253",
+        "settledThroughRound": "1254",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xfd0968a109993ece616538d51011988bea2aba191e6e7fd137e6781e3b85835c:138:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T06:40:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xfd0968a109993ece616538d51011988bea2aba191e6e7fd137e6781e3b85835c"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1252",
+        "settledThroughRound": "1253",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x6eb2c172b81132e7a6273839d17aba887ca9535b79811ed170c898c6469a302a:169:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T06:30:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x6eb2c172b81132e7a6273839d17aba887ca9535b79811ed170c898c6469a302a"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1251",
+        "settledThroughRound": "1252",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x931b2b7e71556ad5365006cb02a038e0268eae437c25a62e55cea6c807297b65:1344:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T06:20:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x931b2b7e71556ad5365006cb02a038e0268eae437c25a62e55cea6c807297b65"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1250",
+        "settledThroughRound": "1251",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xe81ed9baba217f1da54270ea38f780893306fc8a129906b7a79fd3bca07086a1:1279:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T06:10:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xe81ed9baba217f1da54270ea38f780893306fc8a129906b7a79fd3bca07086a1"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1249",
+        "settledThroughRound": "1250",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xb12c27ab0c18a166145393b49e606333211f20458fc9c91181588a15e0305830:144:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T06:05:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xb12c27ab0c18a166145393b49e606333211f20458fc9c91181588a15e0305830"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1248",
+        "settledThroughRound": "1249",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x88ab288ff657516dc6794d2dbf1b924f40c3b5890dd8cf02ef1c1dc42833740a:1006:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T05:50:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x88ab288ff657516dc6794d2dbf1b924f40c3b5890dd8cf02ef1c1dc42833740a"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1247",
+        "settledThroughRound": "1248",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xe3497d0913fba3bd0cecb980934783181029670b66cfc4f27748d97a0708bf09:542:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T05:40:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xe3497d0913fba3bd0cecb980934783181029670b66cfc4f27748d97a0708bf09"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1246",
+        "settledThroughRound": "1247",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x29eeb5ef5189f1e0824adaeba2572eb1d84c9114e76fe3b416281c611b13af9e:165:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T05:30:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x29eeb5ef5189f1e0824adaeba2572eb1d84c9114e76fe3b416281c611b13af9e"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1245",
+        "settledThroughRound": "1246",
+        "workAdded": "443"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xcccbd6546f1a3e2a1ddff3268129c4cc9660053a1a49be0fd2558c2b0cce8ebb:146:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T05:20:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xcccbd6546f1a3e2a1ddff3268129c4cc9660053a1a49be0fd2558c2b0cce8ebb"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1244",
+        "settledThroughRound": "1245",
+        "workAdded": "449"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xa7bae63a9c95a78b648b248a4f8906b36d67dc21765a00fad4010c83e0c93f61:222:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T05:10:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xa7bae63a9c95a78b648b248a4f8906b36d67dc21765a00fad4010c83e0c93f61"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1243",
+        "settledThroughRound": "1244",
+        "workAdded": "112"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x803569243d5ed8602ad6fd3bb0b6f0ec09e56c005f22f189e360bd280bad1c3e:1212:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T05:05:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x803569243d5ed8602ad6fd3bb0b6f0ec09e56c005f22f189e360bd280bad1c3e"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1242",
+        "settledThroughRound": "1243",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x5af1448cda4a00917eadc02c072c215436504cae651902e52180cb736395562f:869:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T04:50:48.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x5af1448cda4a00917eadc02c072c215436504cae651902e52180cb736395562f"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1241",
+        "settledThroughRound": "1242",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x62e4652e5650825c64ffd28f61b46762d5ba7fac191368ed12398b08f70d257a:1102:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T04:40:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x62e4652e5650825c64ffd28f61b46762d5ba7fac191368ed12398b08f70d257a"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1240",
+        "settledThroughRound": "1241",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x445f1be43da19acd03aa71cf0a5231a2aa4fbf9c1699257f8faa221dacf380b2:138:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T04:30:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x445f1be43da19acd03aa71cf0a5231a2aa4fbf9c1699257f8faa221dacf380b2"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1239",
+        "settledThroughRound": "1240",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x54f189566eac2624405c77c2f7e2d5d1f83bce16ea8483d90d0d4cf8bd35ad33:1324:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T04:20:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x54f189566eac2624405c77c2f7e2d5d1f83bce16ea8483d90d0d4cf8bd35ad33"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1238",
+        "settledThroughRound": "1239",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x56153068c4a63f282d5a3f0d60d23bb1938d08b6c43d08c532cf6b747fd539a1:1341:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T04:10:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x56153068c4a63f282d5a3f0d60d23bb1938d08b6c43d08c532cf6b747fd539a1"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1237",
+        "settledThroughRound": "1238",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xa8edd9403d2d9d8a853a6229ca2c5ae418ee81c615cca114c36683a458e5e271:201:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T04:00:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xa8edd9403d2d9d8a853a6229ca2c5ae418ee81c615cca114c36683a458e5e271"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1236",
+        "settledThroughRound": "1237",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xa6bb874e6a10ec7731c948b7265a7fa37eead25fb7e5bae5cd2924af1c532262:139:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T03:50:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xa6bb874e6a10ec7731c948b7265a7fa37eead25fb7e5bae5cd2924af1c532262"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1235",
+        "settledThroughRound": "1236",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x7d865d81ead6ec4425ef1079b3b745ca515b967875dedd5608437a95bb43ed47:357:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T03:45:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x7d865d81ead6ec4425ef1079b3b745ca515b967875dedd5608437a95bb43ed47"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1234",
+        "settledThroughRound": "1235",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x4a480e521459e9282568bcfd6ad65a25dd9ff3d0eb14d744522c178628b2fe1d:180:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T03:30:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x4a480e521459e9282568bcfd6ad65a25dd9ff3d0eb14d744522c178628b2fe1d"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1233",
+        "settledThroughRound": "1234",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x693e483a202d9e11fbc5d81a55441d82fcd1e936e2915650f45147c011a25da0:1473:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T03:20:48.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x693e483a202d9e11fbc5d81a55441d82fcd1e936e2915650f45147c011a25da0"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1232",
+        "settledThroughRound": "1233",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xfdd2639aa22b0844abe15a8d0f25d17f12ca4ee13c474f931914db3d3c62cf50:1103:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T03:10:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xfdd2639aa22b0844abe15a8d0f25d17f12ca4ee13c474f931914db3d3c62cf50"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1231",
+        "settledThroughRound": "1232",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x6e97a3a9a9ffc68ea1c00bc9b1183ff20cd458921fe4abd7fa7597aa0837e41f:241:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T03:01:12.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x6e97a3a9a9ffc68ea1c00bc9b1183ff20cd458921fe4abd7fa7597aa0837e41f"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1230",
+        "settledThroughRound": "1231",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xa87d5d05aeef2c04aaf53d3f000ac42d16e0e4a99c0aeb2c9ec4b40d12e67c11:85:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T02:55:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xa87d5d05aeef2c04aaf53d3f000ac42d16e0e4a99c0aeb2c9ec4b40d12e67c11"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1229",
+        "settledThroughRound": "1230",
+        "workAdded": "464"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xba5b9e296b078bab9f1e53a584ddf73325221404c05978fa765cd381b257329f:1222:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T02:40:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xba5b9e296b078bab9f1e53a584ddf73325221404c05978fa765cd381b257329f"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1228",
+        "settledThroughRound": "1229",
+        "workAdded": "427"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xb7c8fe0c467a1b70a33cf8322b14337340881091897836171c3fd78bc104bad1:228:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T02:30:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xb7c8fe0c467a1b70a33cf8322b14337340881091897836171c3fd78bc104bad1"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1227",
+        "settledThroughRound": "1228",
+        "workAdded": "457"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x0a9e565779ade713d93d25830c6b941dc9020e155e491d2bc2584a2210eb8695:119:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T02:20:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x0a9e565779ade713d93d25830c6b941dc9020e155e491d2bc2584a2210eb8695"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1226",
+        "settledThroughRound": "1227",
+        "workAdded": "420"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x2e30c21658d7004a8b1f226399d7e79e00155e4e05f57ad99733dafc8baac22b:153:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T02:10:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x2e30c21658d7004a8b1f226399d7e79e00155e4e05f57ad99733dafc8baac22b"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1225",
+        "settledThroughRound": "1226",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xe09d22a22d1f655fa4717cacbf8e6bcc7f33deee83302aadf8c897987f7a2521:271:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T02:00:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xe09d22a22d1f655fa4717cacbf8e6bcc7f33deee83302aadf8c897987f7a2521"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1224",
+        "settledThroughRound": "1225",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xa44d1b6e2dc4897ec7aa2518b7e701a6cdc067963a9fd8af2c7872d5e9311b42:178:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T01:50:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xa44d1b6e2dc4897ec7aa2518b7e701a6cdc067963a9fd8af2c7872d5e9311b42"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1223",
+        "settledThroughRound": "1224",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xb77ee4455aac1cdbaeca8c2eacf75e6cbcf796cd6d02425c566db9681edc2afc:122:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T01:40:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xb77ee4455aac1cdbaeca8c2eacf75e6cbcf796cd6d02425c566db9681edc2afc"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1222",
+        "settledThroughRound": "1223",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x899694ceaae04efc680b73912b403d77c5f1de8c54718c57c0894a30276e78e7:241:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T01:35:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x899694ceaae04efc680b73912b403d77c5f1de8c54718c57c0894a30276e78e7"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1221",
+        "settledThroughRound": "1222",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x22b558ddebd924b3270802e3eb312f711e223b502a769cac6b5cd5b99da000fd:1230:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T01:20:48.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x22b558ddebd924b3270802e3eb312f711e223b502a769cac6b5cd5b99da000fd"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1220",
+        "settledThroughRound": "1221",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x4c3b16fe4bb0993d031d966249989be398f862714eaf293c27388ca0d098e225:154:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T01:10:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x4c3b16fe4bb0993d031d966249989be398f862714eaf293c27388ca0d098e225"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1219",
+        "settledThroughRound": "1220",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xc332f75fe64811bf8666b830dbc36795be78ad95f73c9207ab07765aa3bccee7:220:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T01:00:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xc332f75fe64811bf8666b830dbc36795be78ad95f73c9207ab07765aa3bccee7"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1218",
+        "settledThroughRound": "1219",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xdb1eddc325d5df43787076575824ef6352c4917f00b3ec88dda863b8f2cc44fa:1204:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T00:50:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xdb1eddc325d5df43787076575824ef6352c4917f00b3ec88dda863b8f2cc44fa"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1217",
+        "settledThroughRound": "1218",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xecefab459fe13f96ec70e843977eeebee0dcca6a0096dda2bc1b62ed9f027659:1235:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T00:40:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xecefab459fe13f96ec70e843977eeebee0dcca6a0096dda2bc1b62ed9f027659"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1216",
+        "settledThroughRound": "1217",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0xd91ee1d63eacc9b63d4525ca7d0ba3764e32e5080b5486597b9bedcdfb9e4a30:267:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T00:30:48.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0xd91ee1d63eacc9b63d4525ca7d0ba3764e32e5080b5486597b9bedcdfb9e4a30"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1215",
+        "settledThroughRound": "1216",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x0d43d15218116f26afd30e748362c63da7a7d920cbb9a845055c088bafa9fd1b:302:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T00:20:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x0d43d15218116f26afd30e748362c63da7a7d920cbb9a845055c088bafa9fd1b"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1214",
+        "settledThroughRound": "1215",
+        "workAdded": "0"
+      }
+    },
+    {
+      "id": "chain:11155111:0x980b4424c007caf7a1f3670b48c8eaef7ebc3d44:0x0120e9817f1bf17a5ad0ba51f7815636ed61198236cf870582dc0a9b98c03c3b:144:system.settlement_completed",
+      "type": "system.settlement_completed",
+      "occurredAt": "2026-11-04T00:15:36.000Z",
+      "source": {
+        "chainId": "11155111",
+        "confirmationStatus": "safe",
+        "transactionHash": "0x0120e9817f1bf17a5ad0ba51f7815636ed61198236cf870582dc0a9b98c03c3b"
+      },
+      "payload": {
+        "previousSettledThroughRound": "1213",
+        "settledThroughRound": "1214",
+        "workAdded": "498"
+      }
+    }
+  ]
+}

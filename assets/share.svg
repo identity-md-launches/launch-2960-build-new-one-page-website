@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#f4f1e8"/>
+<rect x="65" y="65" width="50" height="50" rx="5" fill="#3e4b37"/>
+<path d="M76 76h4v28h-4zm11 0h4v28h-4zm11 0h4v28h-4z" fill="#78846a"/>
+<path d="M72 83h36v4H72zm0 12h36v4H72z" fill="#e1ad62"/>
+<path d="M87 83h6v6h-6z" fill="#de6047"/>
+<text x="136" y="102" fill="#2e352d" font-family="Georgia,serif" font-size="36">Burrowkeep · 轮谱</text>
+<text x="65" y="223" fill="#2e352d" font-family="Georgia,serif" font-size="64">A cloth you can hear.</text>
+<text x="67" y="275" fill="#676d62" font-family="Arial,sans-serif" font-size="24">One confirmed round. One stitch. One note.</text>
+<rect x="65" y="325" width="1070" height="232" rx="5" fill="#272d25"/>
+<defs><pattern id="weave" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#503d30"/><path d="M0 0h6v6H0zm6 6h6v6H6z" fill="#5b4737"/></pattern></defs>
+<rect x="105" y="377" width="990" height="128" fill="url(#weave)"/>
+<g fill="#e1ad62"><path d="M119 441h16v4h-16zm32-16h16v4h-16zm64 32h16v4h-16zm32-64h16v4h-16zm32 48h16v4h-16zm64-16h16v4h-16zm32 48h16v4h-16zm96-32h16v4h-16zm32-16h16v4h-16zm32 32h16v4h-16zm64-64h16v4h-16zm32 48h16v4h-16zm64-16h16v4h-16zm32 48h16v4h-16zm96-32h16v4h-16zm32-16h16v4h-16zm64 32h16v4h-16zm32-64h16v4h-16zm64 48h16v4h-16z"/></g>
+<g fill="#f4dfad"><path d="M407 409h20v4h-20zm320 48h20v4h-20zm256-48h20v4h-20z"/></g>
+<g fill="#de6047"><path d="M415 409h8v8h-8zm320 48h8v8h-8zm256-48h8v8h-8z"/></g>
+<path d="M1063 425h4v4h-4z" fill="#f8f0de"/>
+</svg>

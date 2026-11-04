@@ -1,0 +1,7 @@
+# Explicit path budget: this file <= 1 KiB; each excluded tree contributes 0 bytes.
+# dist/ and all source, runtime assets, manifests, lockfiles and documents stay included.
+**/node_modules/
+**/.cache/
+**/.npm/
+**/.vite/
+test/scratch/
